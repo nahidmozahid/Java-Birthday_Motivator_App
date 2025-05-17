@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Birthday Motivator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+        }
+        input[type="date"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #007bff;
+        }
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+        .message {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #28a745;
+        }
+        .motivation {
+            font-style: italic;
+            margin-top: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Enter your Date of Birth</h1>
+    <form th:action="@{/calculate}" method="post">
+        <input type="date" name="dob" required />
+        <button type="submit">Calculate Age</button>
+    </form>
+
+    <div th:if="${age != null}">
+        <h2>Your Age: <span th:text="${age}"></span></h2>
+    </div>
+
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+    <div class="motivation" th:if="${motivation}" th:text="${motivation}"></div>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+</div>
+</body>
+</html>
